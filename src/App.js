@@ -13,6 +13,9 @@ const App = () => {
     JSON.parse(localStorage.getItem('users')) || []
   );
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingUserId, setEditingUserId] = useState(null);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
@@ -23,21 +26,52 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     // Check if any of the input values are empty
     if (!formData.name || !formData.email || !formData.sex) {
       alert("leave not input empty for a successful form submission!")
       return;
     }
-    const newUser = { ...formData, id: Date.now() };
-    setUsers([...users, newUser]);
-    localStorage.setItem('users', JSON.stringify([...users, newUser]));
+
+    // Check if the email already exists (in edit mode, allow the same email for the same user being edited)
+    const isDuplicateEmail = users.some(
+      (user) =>
+        user.email === formData.email ||
+        (isEditing && user.id !== editingUserId)
+    );
+
+    if (isDuplicateEmail) {
+      alert('Email already exists');
+      return;
+    }
+
+    if (isEditing) {
+      // Update the user data
+      const updatedUsers = users.map((user) =>
+        user.id === editingUserId ? { ...formData, id: editingUserId } : user
+      );
+      setUsers(updatedUsers);
+      localStorage.setItem('users', JSON.stringify(updatedUsers));
+      setIsEditing(false);
+      setEditingUserId(null);
+    } else {
+      // Add a new user
+      const newUser = { ...formData, id: Date.now() };
+      setUsers([...users, newUser]);
+      localStorage.setItem('users', JSON.stringify([...users, newUser]));
+    }
 
     // Clear the form data after successful submission
     setFormData({ name: '', email: '', sex: '' });
   };
 
   const handleEdit = (id) => {
-    // edit op goes here
+    const userToEdit = users.find((user) => user.id === id);
+    if (userToEdit) {
+      setFormData(userToEdit);
+      setIsEditing(true);
+      setEditingUserId(id);
+    }
   };
 
   const handleDelete = (id) => {
