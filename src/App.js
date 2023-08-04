@@ -31,6 +31,9 @@ const App = () => {
     const newUser = { ...formData, id: Date.now() };
     setUsers([...users, newUser]);
     localStorage.setItem('users', JSON.stringify([...users, newUser]));
+
+    // Clear the form data after successful submission
+    setFormData({ name: '', email: '', sex: '' });
   };
 
   const handleEdit = (id) => {
@@ -38,7 +41,9 @@ const App = () => {
   };
 
   const handleDelete = (id) => {
-    // delete op goes here
+    const updatedUsersAfterRemoval = users.filter((user) => user.id !== id);
+    setUsers(updatedUsersAfterRemoval);
+    localStorage.setItem('users', JSON.stringify(updatedUsersAfterRemoval));
   };
 
   return (
