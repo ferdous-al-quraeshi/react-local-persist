@@ -28,18 +28,6 @@ const UserForm = ({
       return;
     }
 
-    // Check if the email already exists (in edit mode, allow the same email for the same user being edited)
-    const isDuplicateEmail = users.some(
-      (user) =>
-        user.email === formData.email ||
-        (isEditing && user.id !== editingUserId)
-    );
-
-    if (isDuplicateEmail) {
-      alert('Email already exists');
-      return;
-    }
-
     if (isEditing) {
       // Update the user data
       const updatedUsers = users.map((user) =>
@@ -52,6 +40,17 @@ const UserForm = ({
     } else {
       // Add a new user
       const newUser = { ...formData, id: Date.now() };
+      
+      // Check if the email already exists (in edit mode, allow the same email for the same user being edited)
+      const isDuplicateEmail = users.some(
+        (user) =>
+          user.email === newUser.email
+      );
+
+      if (isDuplicateEmail) {
+        alert('Email already exists');
+        return;
+      }
       setUsers([...users, newUser]);
       localStorage.setItem('users', JSON.stringify([...users, newUser]));
     }
