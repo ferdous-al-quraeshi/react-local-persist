@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const UserTable = ({
   users,
@@ -7,6 +7,7 @@ const UserTable = ({
   setIsEditing,
   setEditingUserId
  }) => {
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleEdit = (id) => {
     const userToEdit = users.find((user) => user.id === id);
@@ -23,8 +24,22 @@ const UserTable = ({
     localStorage.setItem('users', JSON.stringify(updatedUsersAfterRemoval));
   };
 
+  const filteredUsers = users.filter((user) =>
+    user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="SectionContainer">
+    <>
+      <div>
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Type to filter by name"
+        />
+        <button onClick={() => setSearchTerm('')}>Clear</button>
+      </div>
+      <div className="SectionContainer">
         <table className="DataTable">
           <thead>
           <tr>
@@ -35,12 +50,12 @@ const UserTable = ({
           </tr>
           </thead>
           <tbody>
-            {users.length === 0 &&
+            {filteredUsers.length === 0 &&
               <tr className="NoDataRow">
                 <td>No Data</td>
               </tr>
             }
-            {users.map((user) => (
+            {filteredUsers.map((user) => (
               <tr key={user.id}>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
@@ -54,6 +69,7 @@ const UserTable = ({
           </tbody>
         </table>
       </div>
+    </>
   )
 
 }
