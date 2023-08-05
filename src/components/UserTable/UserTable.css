@@ -5,7 +5,7 @@
 }
 
 .FilterWrapper input[type="text"] {
-  height: 20px;
+  height: 1.5rem;
 }
 
 .FilterWrapper button {
@@ -19,6 +19,11 @@
 
 .DataTable th, td {
   border: 1px solid black;
+  height: 2rem;
+}
+
+.DataTable td {
+  height: 3rem;
 }
 
 .DataTable thead > tr {
