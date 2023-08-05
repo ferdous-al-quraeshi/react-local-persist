@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './UserForm.css';
+
 const UserForm = ({
   users,
   setUsers,
@@ -66,6 +68,7 @@ const UserForm = ({
           <input
             type="text"
             name="name"
+            placeholder="Full name"
             value={formData.name}
             onChange={handleChange}
           />
@@ -77,6 +80,7 @@ const UserForm = ({
           <input
             type="email"
             name="email"
+            placeholder="Email ID"
             value={formData.email}
             onChange={handleChange}
           />

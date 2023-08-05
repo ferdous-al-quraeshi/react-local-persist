@@ -4,37 +4,9 @@
 
 .SectionContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   margin: 30px auto;
   padding: 20px;
-}
-
-.UserForm input {
-  margin-left: 10px;
-}
-
-.UserForm button[type="submit"] {
-  width: 100%;
-}
-
-.DataTable {
-  width: 98%;
-  border-collapse: collapse;
-}
-
-th, td {
-  border: 1px solid black;
-}
-
-.NoDataRow {
-  display: flex;
-  justify-content: center;
-  width: 328%;
-  height: 200px;
-  align-items: center;
-  background-color: #eeeeee;
-}
-
-.NoDataRow td {
-  border: none;
 }

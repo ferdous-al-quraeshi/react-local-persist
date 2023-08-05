@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+
+import UserForm from './components/UserForm/UserForm';
+import UserTable from './components/UserTable/UserTable';
+
 import './App.css';
-import UserForm from './UserForm';
-import UserTable from './UserTable';
 
 
 const App = () => {

@@ -1,0 +1,43 @@
+.FilterWrapper {
+  width: 100%;
+  align-self: flex-start;
+  margin-bottom: 10px;
+}
+
+.FilterWrapper input[type="text"] {
+  height: 20px;
+}
+
+.FilterWrapper button {
+  margin-left: 5px;
+}
+
+.DataTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.DataTable th, td {
+  border: 1px solid black;
+}
+
+.DataTable thead > tr {
+  background-color: #c3bebe;
+}
+
+tbody td button:last-of-type {
+  margin-left: 10px;
+}
+
+.NoDataRow {
+  display: flex;
+  justify-content: center;
+  width: 328%;
+  min-height: 200px;
+  align-items: center;
+  background-color: #eeeeee;
+}
+
+.NoDataRow td {
+  border: none;
+}
