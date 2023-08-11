@@ -114,8 +114,8 @@ const UserForm = ({
         </label>
         <br />
         <br />
+        <button className="BtnClear" title="Reset form fields" onClick={handleReset}>Reset</button>
         <button type="submit">Submit</button>
-        <button className="BtnClear" title="Clear input fields" onClick={handleReset}>Clear</button>
       </form>
     </div>
   )
