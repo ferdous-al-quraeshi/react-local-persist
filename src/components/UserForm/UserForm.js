@@ -3,6 +3,7 @@ import React from 'react';
 import './UserForm.css';
 
 const UserForm = ({
+  initialFormData,
   users,
   setUsers,
   formData,
@@ -56,8 +57,14 @@ const UserForm = ({
     }
 
     // Clear the form data after successful submission
-    setFormData({ name: '', email: '', sex: '' });
+    setFormData(initialFormData);
   };
+
+  const handleReset = (e) => {
+    e.preventDefault();
+    // Clear the form data after successful submission
+    setFormData(initialFormData);
+  }
 
   return (
     <div className="SectionContainer">
@@ -108,6 +115,7 @@ const UserForm = ({
         <br />
         <br />
         <button type="submit">Submit</button>
+        <button className="BtnClear" title="Clear input fields" onClick={handleReset}>Clear</button>
       </form>
     </div>
   )

@@ -7,11 +7,13 @@ import './App.css';
 
 
 const App = () => {
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     name: '',
     email: '',
     sex: '',
-  });
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
 
   const [users, setUsers] = useState(
     JSON.parse(localStorage.getItem('users')) || []
@@ -26,6 +28,7 @@ const App = () => {
         <br />
       with React and LocalStorage</h1>
       <UserForm
+        initialFormData = {initialFormData}
         users={users}
         setUsers={setUsers}
         formData={formData}
